@@ -36,7 +36,9 @@ double average(int num,...) {
    return sum/num;
 }
 
-int main() {
+void main() {
    printf("Average of 2, 3, 4, 5 = %f\n", average(4, 2,3,4,5));
    printf("Average of 5, 10, 15 = %f\n", average(3, 5,10,15));
+   /* When the number of values is incorrect, the function takes values as specified, others are ignored.*/
+   printf("Average of 5, 10, 15 if num is incorrect = %f\n", average(2, 5,10,15));
 }

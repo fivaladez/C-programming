@@ -45,7 +45,8 @@ __STDC__        - Defined as 1 when the compiler complies with the ANSI standard
     #define MESSAGE "You wish!"
 #endif
 
-#define MAX(x,y) ((x) > (y) ? (x) : (y)) /* NOTE: Similar to a Lambda expression in Python*/
+/* NOTE: Similar to a Lambda expression in Python*/
+#define MAX(x,y) ((x) > (y) ? (x) : (y))
 
 void main() {
     /* Predefined Macros */
