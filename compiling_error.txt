@@ -1,7 +1,0 @@
-D:\Programacion\C\C Programming\Exercice01.c: In function 'main':
-D:\Programacion\C\C Programming\Exercice01.c:24:5: warning: implicit declaration of function 'clrscr'; did you mean 'strstr'? [-Wimplicit-function-declaration]
-     clrscr();/* Clean the terminal */
-     ^~~~~~
-     strstr
-c:/mingw/bin/../lib/gcc/mingw32/8.2.0/../../../../mingw32/bin/ld.exe: C:\Users\ivan_\AppData\Local\Temp\ccgxc9x6.o:Exercice01.c:(.text+0x12): undefined reference to `clrscr'
-collect2.exe: error: ld returned 1 exit status

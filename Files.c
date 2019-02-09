@@ -22,13 +22,16 @@ void main(){
     fputs("This is testing for fputs...\n", fp); /* wr ites the string s to the output stream referenced by fp */
     /* int fputc( int c, FILE *fp ); */
     fputc( 'a', fp ); /* writes the character value of the argument c to the output stream referenced by fp */
+    /* size_t fwrite(const void *ptr, size_t size, size_t nmemb, FILE *stream) */
+    fwrite("\nThis is testing for fwrite...\n", sizeof(char), 30, fp);
     fclose(fp);
 
     char buff[255];
-
     fp = fopen("test.txt", "r");
+
     fscanf(fp, "%s", buff);
     printf("1 : %s\n", buff );
+
     /* char *fgets( char *buf, int n, FILE *fp ); */
     fgets(buff, 255, (FILE*)fp); /* reads up to n-1 characters from the input stream referenced by fp.
     It copies the read string into the buffer buf, appending a null character to terminate the string.*/
@@ -42,7 +45,10 @@ void main(){
     c = fgetc( fp );
     printf("4: %c\n", c );
 
-    /* size_t fwrite(const void *ptr, size_t size, size_t nmemb, FILE *stream) */
+    char buff2[255] = {0};
     /* size_t fread(void *ptr, size_t size, size_t nmemb, FILE *stream) */
+    fread(buff, sizeof(char), 255, fp);
+    printf("5: %s\n", buff );
+
     fclose(fp);
 }
