@@ -58,7 +58,7 @@ void add(void){
     scanf("%d", &second_number);
 
     result = first_number + second_number;
-    printf("   The result is: %d\n", result);
+    printf("    The result is: %d\n", result);
 
 }
 void sub(void){
@@ -72,7 +72,7 @@ void sub(void){
     scanf("%d", &second_number);
 
     result = first_number - second_number;
-    printf("   The result is: %d\n", result);
+    printf("    The result is: %d\n", result);
 }
 void multi(void){
 
@@ -85,7 +85,7 @@ void multi(void){
     scanf("%d", &second_number);
 
     result = first_number * second_number;
-    printf("   The result is: %d\n", result);
+    printf("    The result is: %d\n", result);
 }
 void divi(void){
 
@@ -98,5 +98,5 @@ void divi(void){
     scanf("%d", &second_number);
 
     result = first_number / second_number;
-    printf("   The result is: %d\n", result);
+    printf("    The result is: %d\n", result);
 }

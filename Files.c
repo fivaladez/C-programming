@@ -44,11 +44,13 @@ void main(){
     /* int fgetc( FILE * fp ); */
     c = fgetc( fp );
     printf("4: %c\n", c );
+    fclose(fp);
 
-    char buff2[255] = {0};
+    fp = fopen("test.txt", "r");
+    char buff2[5000] = {0};
     /* size_t fread(void *ptr, size_t size, size_t nmemb, FILE *stream) */
-    fread(buff, sizeof(char), 255, fp);
-    printf("5: %s\n", buff );
+    fread(buff2, sizeof(char), 5000, fp);
+    printf("5: %s\n", buff2 );
 
     fclose(fp);
 }
