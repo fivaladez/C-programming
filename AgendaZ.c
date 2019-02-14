@@ -23,12 +23,12 @@ void main()
     {
         system("cls");
 
-        printf("        === MENU ===\n");
-        printf("    1 - Add new contact \n");
-        printf("    2 - Loof for a contact\n");
-        printf("    3 - Eliminate a contact\n");
-        printf("    4 - Erase 'agenda'\n");
-        printf("    5 - Exit\n\n");
+        printf("\n\n        === MENU ===");
+        printf("\n    1 - Add new contact ");
+        printf("\n    2 - Loof for a contact");
+        printf("\n    3 - Eliminate a contact");
+        printf("\n    4 - Erase agenda");
+        printf("\n    5 - Exit\n\n");
 
         printf("    Introduce the option desired: ");
         fflush(stdin);
@@ -63,21 +63,9 @@ void add_contact(void)
     fflush(stdin);
 	gets( agenda.complete_name );
 
-    /*printf("\n    Introuce the e-mail: ");
-    fflush(stdin);
-	gets(agenda.e_mail);
-
-    printf("\n    Introuce the addess: ");
-    fflush(stdin);
-	gets(agenda.address);*/
-
     printf("\n    Introuce the cellphone number: ");
     fflush(stdin);
 	gets(agenda.cellphone_number);
-
-    /*printf("\n    Introuce the telephone number: ");
-    fflush(stdin);
-	scanf("%d", &agenda.telephone_number);*/
 
     fp = fopen("MyAgendaTest.txt", "a+");
     if( fp == NULL ){
