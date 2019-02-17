@@ -2,10 +2,13 @@
 #include <stdlib.h>
 #include <string.h>
 
+#define NAME_NUM    25
+#define CELL_NUM    15
+
 struct Agenda{
 
-    char complete_name[25];
-    char cellphone_number[15];
+    char complete_name[NAME_NUM];
+    char cellphone_number[CELL_NUM];
 
 }agenda;
 
@@ -185,12 +188,12 @@ void erase_agenda(void)
 
     remove("MyAgendaTest.txt");
 
-    for(index = 0; 25 > index; index++)
+    for(index = 0; NAME_NUM > index; index++)
     {
         agenda.complete_name[index] = ' ';
     }
 
-    for(index = 0; 15 > index; index++)
+    for(index = 0; CELL_NUM > index; index++)
     {
         agenda.cellphone_number[index] = ' ';
     }
