@@ -53,4 +53,18 @@ void main(){
     printf("5: %s\n", buff2 );
 
     fclose(fp);
+
+    int check;
+    char* dirname = "geeskforgeeks";
+
+    check = mkdir(dirname);
+
+    // check if directory is created or not
+    if (!check)
+        printf("Directory created\n");
+    else {
+        printf("Unable to create directory\n");
+        exit(1);
+    }
+
 }
