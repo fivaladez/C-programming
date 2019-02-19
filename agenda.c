@@ -1,154 +1,201 @@
-#include<stdio.h>
-#include<stdlib.h>
-#include<string.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
-struct agenda {
-	char nom[15];
-	int t_f;
-	int t_m;
-	char dir[30], email[40], grupos[12];
-} control[100];
-int cont=0;
+#define NAME_NUM    25
+#define CELL_NUM    15
 
-void agregar();
-void buscar();
-void contactos();
+struct Agenda{
 
-main(){
-	int opc;
+    char complete_name[NAME_NUM];
+    char cellphone_number[CELL_NUM];
 
-	do{
+}agenda;
+
+void add_contact(void);
+void lookfor_contact(void);
+void eliminate_contact(void);
+void erase_agenda(void);
+
+FILE *fp,*ft;
+
+void main()
+{
+    int control = 0;
+    for(;;)
+    {
+        system("cls");
+
+        printf("\n\n        === MENU ===");
+        printf("\n    1 - Add new contact ");
+        printf("\n    2 - Loof for a contact");
+        printf("\n    3 - Eliminate a contact");
+        printf("\n    4 - Erase agenda");
+        printf("\n    5 - Exit\n\n");
+
+        printf("    Introduce the option desired: ");
+        fflush(stdin);
+        scanf("%d", &control);
+
+        switch(control)
+        {
+            case 1: add_contact();
+                break;
+            case 2: lookfor_contact();
+                break;
+            case 3: eliminate_contact();
+                break;
+            case 4: erase_agenda();
+                break;
+            case 5: exit(0);
+                break;
+            default: printf("\n\n   '%d' is not an option. Try again.", control);
+                break;
+        }
+        printf("\n\n");
+        system("pause");
+    }
+}
+
+void add_contact(void)
+{
+    ADD_CONTACT:system("cls");
+    printf("\n\n    ===== Add a contact =====\n\n");
+
+    printf("\n    Introuce the first and last name: ");
+    fflush(stdin);
+	gets( agenda.complete_name );
+
+    printf("\n    Introuce the cellphone number: ");
+    fflush(stdin);
+	gets(agenda.cellphone_number);
+
+    fp = fopen("MyAgendaTest.txt", "a+");
+    if( fp == NULL ){
+
 		system("cls");
+        printf("\n\n    There was an ERROR opening or creating your file");
+        getchar();
+		exit(1);
 
-		printf("MENU\n");
-		printf("1.Agregar\n");
-		printf("2.Buscar\n");
-		printf("3.Ver todos los contactos\n");
-		printf("4.Salir\n");
+	}else{
 
-		scanf("%d", &opc);
+        fwrite(&agenda,sizeof(agenda),1,fp);
+        fclose( fp );
 
-		switch(opc){
-		case 1:
-			agregar();
-			system("pause");
-			break;
+    }
 
-		case 2:
-			buscar();
-			system("pause");
-			break;
-
-		case 3:
-			contactos();
-			system("pause");
-			break;
-		}
-	}while(opc!=4);
-
-	return 0;
-}
-
-void agregar(){
-	system("cls");
-
-	fflush(stdin);
-	printf("\n%d.Nombre de contacto:", (cont+1));
-	gets(control[cont].nom);
-
-	fflush(stdin);
-	printf("\nTel\202fono fijo:");
-	scanf("%d", &control[cont].t_f);
-
-	fflush(stdin);
-	printf("\nTel\202fono m\242vil:");
-	scanf("%d", &control[cont].t_m);
-
-	fflush(stdin);
-	printf("\nDirecci\242n:");
-	gets(control[cont].dir);
-
-	fflush(stdin);
-	printf("\nE-mail:");
-	gets(control[cont].email);
-
-	fflush(stdin);
-	printf("\nGrupo:");
-	gets(control[cont].grupos);
-
-	cont++;
+    char again = ' ';
+    printf("\n  Do you want yo add another contact (y/n)? ");
+    fflush(stdin);
+    again = getchar();
+    if( 'y' == again ){
+        goto ADD_CONTACT;
+    }
 
 }
+void lookfor_contact(void)
+{
+    char look_for_name[50];
+    system("cls");
+    printf("\n\n    ===== Loof for name =====\n\n");
 
-void buscar(){
-	char busca[15];
-	int i;
+    printf("\n    Introuce the first and last name to look for: ");
+    fflush(stdin);
+	gets(look_for_name);
 
-	system("cls");
+    fp = fopen("MyAgendaTest.txt", "r+");
+    if( fp == NULL )
+    {
 
-	fflush(stdin);
-	printf("\nBuscar contacto\nIngrese el nombre del contacto:");
-	gets(busca);
+		system("cls");
+        printf("\n\n    There was an ERROR opening your file");
+        getchar();
+		exit(1);
 
-	for(i=0;i<cont;i++){
-		if(strcmpi(busca,control[i].nom)==0){
-			printf("\nNombre: %s\n", control[i].nom);
-			printf("Tel\202fono fijo: %d\n", control[i].t_f);
-			printf("Tel\202fono m\242vil: %d\n", control[i].t_m);
-			printf("Direcci\242n: %s\n", control[i].dir);
-			printf("E-mail: %s\n", control[i].email);
-			printf("Grupo: %s\n", control[i].grupos);
-		}
-	}
+	}else
+    {
+        unsigned int control_var = 0;
+        while( fread(&agenda, sizeof(agenda), 1, fp) )
+    	{
+    		if(strcmp( agenda.complete_name, look_for_name )==0)
+    		{
+                printf("\n    The name that you are looking for is: %s", agenda.complete_name);
+                printf("\n    The cellphone that you are looking for is: %s", agenda.cellphone_number);
+                control_var = 1;
+                break;
+            }
+    	}
+        fclose( fp );
+        if( 0 == control_var)
+        {
+            printf("\n\n    The contact doesn´t exist");
+        }
+
+    }
+
 
 }
+void eliminate_contact(void)
+{
+    char name_to_eliminate[30];
+    system("cls");
+    printf("\n\n    ===== Eliminate contact =====\n\n");
 
-void contactos(){
-	int aux, i, j;
-	char auxc[50];
+    printf("\n    Introuce the first and last name to eliminate: ");
+    fflush(stdin);
+	gets(name_to_eliminate);
 
-	system("cls");
+    fp = fopen("MyAgendaTest.txt", "r");
+    ft = fopen("MyAgendaTest_temporary.txt", "w+");
+    if( fp == NULL )
+    {
 
-	for(i=0;i<cont-1;i++){
-		for(j=0;j<cont-1-i;j++){
-			if(strcmp(control[j].nom,control[j+1].nom)>0){
-				
-				strcpy(auxc,control[j].nom);
-				strcpy(control[j].nom,control[j+1].nom);
-				strcpy(control[j+1].nom,auxc);
+		system("cls");
+        printf("\n\n    There was an ERROR opening your file");
+        getchar();
+		exit(1);
 
-				aux = control[j].t_f;
-				control[j].t_f = control[j+1].t_f;
-				control[j+1].t_f = aux;
+	}else
+    {
+        unsigned int control_var = 0;
+        while( fread(&agenda,sizeof(agenda),1,fp) )
+    	{
+    		if(strcmp( agenda.complete_name, name_to_eliminate )==0)
+    		{
+                control_var = 1;
+            }else
+            {
+                fwrite(&agenda, sizeof(agenda),1,ft);
+            }
+    	}
+        fclose(fp);
+		fclose(ft);
+        if( 0 == control_var)
+        {
+            printf("\n\n    The contact doesn´t exist");
+        }else
+        {
+            remove("MyAgendaTest.txt");
+    		rename("MyAgendaTest_temporary.txt","MyAgendaTest.txt");
+        }
+    }
+}
+void erase_agenda(void)
+{
 
-				aux = control[j].t_m;
-				control[j].t_m = control[j+1].t_m;
-				control[j+1].t_m = aux;
+    int index = 0;
 
-				strcpy(auxc,control[j].dir);
-				strcpy(control[j].dir,control[j+1].dir);
-				strcpy(control[j+1].dir,auxc);
+    remove("MyAgendaTest.txt");
 
-				strcpy(auxc,control[j].email);
-				strcpy(control[j].email,control[j+1].email);
-				strcpy(control[j+1].email,auxc);
+    for(index = 0; NAME_NUM > index; index++)
+    {
+        agenda.complete_name[index] = ' ';
+    }
 
-				strcpy(auxc,control[j].grupos);
-				strcpy(control[j].grupos,control[j+1].grupos);
-				strcpy(control[j+1].grupos,auxc);
-			}
-		}
-	}
-
-	printf("\nAgenda.\n");
-
-	for(i=0;i<cont;i++){
-		printf("\n%d.Nombre: %s\n",(i+1), control[i].nom);
-		printf("Tel\202fono fijo: %d\n", control[i].t_f);
-		printf("Tel\202fono m\242vil: %d\n", control[i].t_m);
-		printf("Direcci\242n: %s\n", control[i].dir);
-		printf("E-mail: %s\n", control[i].email);
-		printf("Grupo: %s\n", control[i].grupos);
-	}
+    for(index = 0; CELL_NUM > index; index++)
+    {
+        agenda.cellphone_number[index] = ' ';
+    }
 
 }

@@ -12,13 +12,13 @@ void main(){
     printf("\n");
     for(index = 0; index < 10; index++){
         if( 5 < index){
-            printf("    Now index is %i\n", index);
+            printf("\n\tNow index is %i", index);
             break;/*It stops the loop*/
         }else if( 3 == index ){
-            printf("    Now index is %i and the rest of the loop will be skiped\n", index);
+            printf("\n\tNow index is %i and the rest of the loop will be skiped", index);
             continue;/*Stops the current iteration and starts the next one*/
         }else if( 30 == index ){
-            LABEL:printf("    Arrive here is IMPOSIBLE unless you use goto label\n");
+            LABEL:printf("\n\tArrive here is IMPOSIBLE unless you use goto label");
         }else if( 2 == index ){
             goto LABEL;/*Jumps to the defined label in code*/
         }
